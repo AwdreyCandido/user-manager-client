@@ -11,16 +11,40 @@ import { Box, Button, Container, IconButton, Typography } from "@mui/material";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import AddUserModal from "../../../components/modals/AddUserModal";
+import UpdateUserModal from "../../../components/modals/UpdateUserModal";
+import DeleteUserModal from "../../../components/modals/DeleteUserModal";
 
 const HomePage = () => {
+  const [openAddModal, setOpenAddModal] = React.useState(false);
+  const [openUpdateModal, setOpenUpdateModal] = React.useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = React.useState(false);
+  const handleAddOpen = () => setOpenAddModal(!openAddModal);
+  // const handleAddClose = () => setOpenAddModal(false);
+  const handleUpdateOpen = () => setOpenUpdateModal(!openUpdateModal);
+  // const handleUpdateClose = () => setOpenUpdateModal(false);
+  const handleDeleteOpen = () => setOpenDeleteModal(!openDeleteModal);
+  // const handleDeleteClose = () => setOpenDeleteModal(false);
+
   return (
     <Layout>
       <Box style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+        <>
+          <AddUserModal handleClose={handleAddOpen} open={openAddModal} />
+          <UpdateUserModal
+            handleClose={handleUpdateOpen}
+            open={openUpdateModal}
+          />
+          <DeleteUserModal
+            handleClose={handleDeleteOpen}
+            open={openDeleteModal}
+          />
+        </>
         <Typography variant="h3" fontWeight="medium" component="h3">
           Visão Geral
         </Typography>
         <Box marginTop={4}>
-          <TableContainer style={{ borderRadius: 10 }} component={Paper}>
+          <TableContainer style={{ borderRadius: 20 }} component={Paper}>
             <Table aria-label="simple table">
               <TableHead>
                 <TableRow>
@@ -32,13 +56,14 @@ const HomePage = () => {
                   <TableCell align="right">Atualizado em:</TableCell>
                   <TableCell align="center">
                     <Button
+                      onClick={handleAddOpen}
                       variant="contained"
                       style={{
                         backgroundColor: "#4339F2",
                         borderRadius: 10,
                         textTransform: "capitalize",
                         fontFamily: "sora",
-                        fontSize: 16
+                        fontSize: 16,
                       }}
                       endIcon={<AddCircleRoundedIcon />}
                     >
@@ -82,6 +107,7 @@ const HomePage = () => {
                         }}
                       >
                         <IconButton
+                          onClick={handleUpdateOpen}
                           style={{
                             width: "35px",
                             height: "35px",
@@ -91,6 +117,7 @@ const HomePage = () => {
                           <EditRoundedIcon style={{ color: "#4339F2" }} />
                         </IconButton>
                         <IconButton
+                          onClick={handleDeleteOpen}
                           style={{
                             width: "35px",
                             height: "35px",
