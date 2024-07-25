@@ -10,6 +10,7 @@ import {
   ListItem,
   Divider,
 } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -42,14 +43,28 @@ const Sidebar = () => {
               gap: 10,
             }}
           >
-            <ListItem style={{ gap: 10 }}>
-              <HomeRounded />
-              <Typography>Home</Typography>
-            </ListItem>
-            <ListItem style={{ gap: 10 }}>
-              <PieChartRoundedIcon />
-              <Typography>Insights</Typography>
-            </ListItem>
+            <NavLink
+              to="/dashboard/home"
+              style={({ isActive }) => {
+                return isActive ? {color: "#333"} : {color: "#8f8f8f"};
+              }}
+            >
+              <ListItem style={{ gap: 10 }}>
+                <HomeRounded />
+                <Typography>Home</Typography>
+              </ListItem>
+            </NavLink>
+            <NavLink
+              to="/dashboard/insights"
+              style={({ isActive }) => {
+                return isActive ? {color: "#333"} : {color: "#8f8f8f"};
+              }}
+            >
+              <ListItem style={{ gap: 10 }}>
+                <PieChartRoundedIcon />
+                <Typography>Insights</Typography>
+              </ListItem>
+            </NavLink>
           </List>
         </Box>
       </Drawer>
