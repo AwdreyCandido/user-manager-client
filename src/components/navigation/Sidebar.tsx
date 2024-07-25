@@ -9,14 +9,17 @@ import {
   List,
   ListItem,
   Divider,
+  CssBaseline
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <Container>
+    <>
+      <CssBaseline/>
       <Drawer
         variant="permanent"
+        
         sx={{
           width: 180,
           flexShrink: 0,
@@ -68,7 +71,7 @@ const Sidebar = () => {
           </List>
         </Box>
       </Drawer>
-    </Container>
+    </>
   );
 };
 

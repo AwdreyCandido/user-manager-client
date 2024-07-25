@@ -22,19 +22,12 @@ a {
   cursor: pointer;
 }
 
-/* html {
-  font-size: 62.5%;
-} */
-
 body {
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-direction: row;
   background-color: #f5f5f5;
-  padding: 2rem;
   overflow-x: hidden;
   font-family: 'Sora Variable', sans-serif;
   text-decoration: none;

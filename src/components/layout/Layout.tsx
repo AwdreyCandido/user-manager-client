@@ -1,20 +1,22 @@
-import {
-  Box,
-  Container,
-  createTheme,
-  Drawer,
-  ThemeProvider,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import Sidebar from "../navigation/Sidebar";
-
-
 
 const Layout: React.FC<{ children: JSX.Element }> = ({ children }) => {
   return (
-      <Container>
-        <Sidebar />
-        <section>{children}</section>
-      </Container>
+    <Box sx={{ display: "flex", width: "100vw", backgroundColor: "#f5f5f5" }}>
+      <Sidebar />
+      <Box
+        style={{
+          height: "100vh",
+          width: "100%",
+          display: "flex",
+        }}
+        paddingX={4}
+        paddingY={3}
+      >
+        {children}
+      </Box>
+    </Box>
   );
 };
 
