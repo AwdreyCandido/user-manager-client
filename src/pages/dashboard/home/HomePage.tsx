@@ -7,7 +7,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Layout from "../../../components/layout/Layout";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Button, Container, IconButton, Typography } from "@mui/material";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 
 const HomePage = () => {
   return (
@@ -27,6 +30,21 @@ const HomePage = () => {
                   <TableCell align="right">Nascimento</TableCell>
                   <TableCell align="right">Criado em:</TableCell>
                   <TableCell align="right">Atualizado em:</TableCell>
+                  <TableCell align="center">
+                    <Button
+                      variant="contained"
+                      style={{
+                        backgroundColor: "#4339F2",
+                        borderRadius: 10,
+                        textTransform: "capitalize",
+                        fontFamily: "sora",
+                        fontSize: 16
+                      }}
+                      endIcon={<AddCircleRoundedIcon />}
+                    >
+                      Adicionar
+                    </Button>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -54,6 +72,34 @@ const HomePage = () => {
                         hour: "2-digit",
                         minute: "2-digit",
                       })}
+                    </TableCell>
+                    <TableCell align="center">
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          gap: 20,
+                        }}
+                      >
+                        <IconButton
+                          style={{
+                            width: "35px",
+                            height: "35px",
+                            backgroundColor: "#DAD7FE",
+                          }}
+                        >
+                          <EditRoundedIcon style={{ color: "#4339F2" }} />
+                        </IconButton>
+                        <IconButton
+                          style={{
+                            width: "35px",
+                            height: "35px",
+                            backgroundColor: "#FFE5D3",
+                          }}
+                        >
+                          <DeleteRoundedIcon style={{ color: "#FF3A29" }} />
+                        </IconButton>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}
