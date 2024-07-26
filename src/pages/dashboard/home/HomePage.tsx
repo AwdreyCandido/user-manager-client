@@ -7,7 +7,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Layout from "../../../components/layout/Layout";
-import { Box, Button, Container, IconButton, Typography } from "@mui/material";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
@@ -17,99 +16,7 @@ import DeleteUserModal from "../../../components/modals/DeleteUserModal";
 import { UsersContext } from "../../../context/UsersContext";
 import { getAllUsersRequest } from "../../../services/http/users";
 import { localeDateConfig } from "../../../data/utils";
-
-const users = [
-  {
-    id: 1,
-    name: "Ana Costa",
-    email: "ana.costa@example.com",
-    gender: "F",
-    birthDate: "1991-03-29T03:00:00.000Z",
-    createdAt: "2024-01-05T12:15:00.000Z",
-    updatedAt: "2024-01-05T12:15:00.000Z",
-  },
-  {
-    id: 2,
-    name: "Rafael Martins",
-    email: "rafael.martins@example.com",
-    gender: "O",
-    birthDate: "1987-12-05T02:00:00.000Z",
-    createdAt: "2024-01-10T12:30:00.000Z",
-    updatedAt: "2024-01-10T12:30:00.000Z",
-  },
-  {
-    id: 3,
-    name: "Felipe Andrade",
-    email: "felipe.andrade@example.com",
-    gender: "M",
-    birthDate: "1996-10-14T02:00:00.000Z",
-    createdAt: "2024-01-15T13:30:00.000Z",
-    updatedAt: "2024-01-15T13:30:00.000Z",
-  },
-  {
-    id: 4,
-    name: "Mariana Costa",
-    email: "mariana.costa@example.com",
-    gender: "F",
-    birthDate: "1994-07-23T03:00:00.000Z",
-    createdAt: "2024-01-20T12:45:00.000Z",
-    updatedAt: "2024-01-20T12:45:00.000Z",
-  },
-  {
-    id: 5,
-    name: "João Silva",
-    email: "joao.silva@example.com",
-    gender: "M",
-    birthDate: "1988-05-14T03:00:00.000Z",
-    createdAt: "2024-01-25T13:00:00.000Z",
-    updatedAt: "2024-01-25T13:00:00.000Z",
-  },
-  {
-    id: 6,
-    name: "Alex Ferreira",
-    email: "alex.ferreira@example.com",
-    gender: "N",
-    birthDate: "1990-09-12T03:00:00.000Z",
-    createdAt: "2024-01-30T13:15:00.000Z",
-    updatedAt: "2024-01-30T13:15:00.000Z",
-  },
-  {
-    id: 7,
-    name: "Juliana Campos",
-    email: "juliana.campos@example.com",
-    gender: "F",
-    birthDate: "1993-11-18T02:00:00.000Z",
-    createdAt: "2024-02-10T12:45:00.000Z",
-    updatedAt: "2024-02-10T12:45:00.000Z",
-  },
-  {
-    id: 8,
-    name: "Camila Almeida",
-    email: "camila.almeida@example.com",
-    gender: "O",
-    birthDate: "1990-02-03T02:00:00.000Z",
-    createdAt: "2024-02-20T13:15:00.000Z",
-    updatedAt: "2024-02-20T13:15:00.000Z",
-  },
-  {
-    id: 9,
-    name: "Roberto Silva",
-    email: "roberto.silva@example.com",
-    gender: "M",
-    birthDate: "1984-08-22T03:00:00.000Z",
-    createdAt: "2024-02-25T13:00:00.000Z",
-    updatedAt: "2024-02-25T13:00:00.000Z",
-  },
-  {
-    id: 10,
-    name: "Laura Santos",
-    email: "laura.santos@example.com",
-    gender: "F",
-    birthDate: "1992-11-05T02:00:00.000Z",
-    createdAt: "2024-02-15T12:30:00.000Z",
-    updatedAt: "2024-02-15T12:30:00.000Z",
-  },
-];
+import { Box, Button, IconButton, Typography } from "@mui/material";
 
 const HomePage = () => {
   const [openAddModal, setOpenAddModal] = React.useState(false);
@@ -136,7 +43,6 @@ const HomePage = () => {
     }
 
     window.alert("Erro ao buscar todos os produtos");
-    // setAllUsers(users);
   };
 
   return (

@@ -8,10 +8,10 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { ArrowBack } from "@mui/icons-material";
-import { useContext, useState } from "react";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
+import { ArrowBack } from "@mui/icons-material";
+import { useContext, useState } from "react";
 import { UsersContext } from "../../context/UsersContext";
 import { createUserRequest } from "../../services/http/users";
 

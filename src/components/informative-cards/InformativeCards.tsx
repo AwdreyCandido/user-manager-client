@@ -8,9 +8,7 @@ import { useState, useEffect } from "react";
 import { getRegistersQuantity } from "../../services/http/insights";
 
 const InformativeCards = () => {
-  const [selectedMonth, setSelectedMonth] = useState<number>(
-    new Date().getMonth() + 1
-  );
+  const [selectedMonth] = useState<number>(new Date().getMonth() + 1);
   const [registerPerGender, setRegisterPerGender] = useState<number[]>([
     0, 0, 0, 0,
   ]);

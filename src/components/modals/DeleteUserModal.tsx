@@ -2,10 +2,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import { useContext } from "react";
 import { UsersContext } from "../../context/UsersContext";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import { deleteUserRequest } from "../../services/http/users";
 
 const style = {
@@ -25,9 +24,8 @@ const DeleteUserModal: React.FC<{
   handleClose: () => void;
   open: boolean;
 }> = ({ handleClose, open }) => {
-  const { selectedUserId, usersList, deleteUser } = useContext(UsersContext);
-  // const selectedUser = usersList.find((user) => user.id == selectedUserId);
-
+  const { selectedUserId, deleteUser } = useContext(UsersContext);
+  
   const deleteUserHandler = async () => {
     if (!selectedUserId) return window.alert("Falha ao excluir produto.");
 

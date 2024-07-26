@@ -8,16 +8,12 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { ArrowBack } from "@mui/icons-material";
-import { useContext, useEffect, useState } from "react";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
+import { ArrowBack } from "@mui/icons-material";
+import { useContext, useEffect, useState } from "react";
 import { UsersContext } from "../../context/UsersContext";
-import {
-  createUserRequest,
-  updateUserRequest,
-} from "../../services/http/users";
-import { IUser } from "../../models/IUser";
+import { updateUserRequest } from "../../services/http/users";
 
 const style = {
   position: "absolute" as "absolute",

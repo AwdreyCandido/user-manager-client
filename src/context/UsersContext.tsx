@@ -2,7 +2,6 @@ import { createContext, useState } from "react";
 import { IUser } from "../models/IUser";
 
 interface IUsersContextProps {
-  showModal: boolean;
   usersList: IUser[];
   setAllUsers: (incomingList: IUser[]) => void;
   addUser: (newUser: IUser) => void;
@@ -19,7 +18,6 @@ export const UsersContext = createContext<IUsersContextProps>(
 const UsersContextProvider: React.FC<{ children: JSX.Element }> = ({
   children,
 }) => {
-  const [showModal, setShowModal] = useState(false);
   const [usersList, setUsersList] = useState<IUser[]>([]);
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
 
@@ -54,7 +52,6 @@ const UsersContextProvider: React.FC<{ children: JSX.Element }> = ({
   };
 
   const value = {
-    showModal,
     usersList,
     setAllUsers,
     addUser,
