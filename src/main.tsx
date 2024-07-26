@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import InsightsPage from "./pages/dashboard/insights/InsightsPage.tsx";
 import UsersContextProvider from "./context/UsersContext.tsx";
+import { Toaster } from "react-hot-toast";
 
 const theme = createTheme({
   typography: {
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <UsersContextProvider>
       <ThemeProvider theme={theme}>
         <RouterProvider router={router} />
+        <Toaster />
       </ThemeProvider>
     </UsersContextProvider>
   </React.StrictMode>

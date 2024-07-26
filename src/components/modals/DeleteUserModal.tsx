@@ -6,6 +6,10 @@ import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import { useContext } from "react";
 import { UsersContext } from "../../context/UsersContext";
 import { deleteUserRequest } from "../../services/http/users";
+import {
+  notifyError,
+  notifySuccess,
+} from "../../services/notifications/toasts";
 
 const style = {
   position: "absolute" as "absolute",
@@ -25,7 +29,7 @@ const DeleteUserModal: React.FC<{
   open: boolean;
 }> = ({ handleClose, open }) => {
   const { selectedUserId, deleteUser } = useContext(UsersContext);
-  
+
   const deleteUserHandler = async () => {
     if (!selectedUserId) return window.alert("Falha ao excluir produto.");
 
@@ -33,10 +37,11 @@ const DeleteUserModal: React.FC<{
 
     if (res?.status == 200) {
       deleteUser(selectedUserId);
-      return handleClose();
+      handleClose();
+      return notifySuccess("Usuário excluido com sucesso.");
     }
 
-    window.alert("Falha ao excluir usuário.");
+    notifyError("Falha ao excluir usuário.");
   };
 
   return (

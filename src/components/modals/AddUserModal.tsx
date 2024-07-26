@@ -14,6 +14,11 @@ import { ArrowBack } from "@mui/icons-material";
 import { useContext, useState } from "react";
 import { UsersContext } from "../../context/UsersContext";
 import { createUserRequest } from "../../services/http/users";
+import {
+  notifyError,
+  notifySuccess,
+} from "../../services/notifications/toasts";
+import { formatDate } from "../../data/months";
 
 const style = {
   position: "absolute" as "absolute",
@@ -37,11 +42,11 @@ const AddUserModal: React.FC<{
   const { addUser } = useContext(UsersContext);
 
   const [formValues, setFormValues] = useState({
-    name: "Awdrey",
-    email: "awdrey.candido@gmail.com",
-    phone: "81984550777",
-    gender: "M",
-    birthDate: "2001-06-10",
+    name: "",
+    email: "",
+    phone: "",
+    gender: "",
+    birthDate: "",
   });
 
   const handleChange = (event: any) => {
@@ -63,10 +68,11 @@ const AddUserModal: React.FC<{
         createdAt: new Date().toDateString(),
         updatedAt: new Date().toISOString(),
       });
-      return handleClose();
+      handleClose();
+      return notifySuccess("Usuário cadastrado com sucesso.");
     }
 
-    window.alert("Falha ao criar novo usuário.");
+    notifyError("Falha ao criar novo usuário.");
   };
 
   return (
@@ -133,7 +139,9 @@ const AddUserModal: React.FC<{
                 label="Data de Nascimento"
                 variant="outlined"
                 onChange={handleChange}
-                value={formValues.birthDate}
+                value={formatDate(
+                  new Date(formValues.birthDate).toUTCString()
+                )}
                 size="small"
                 type="date"
                 style={{ width: "100%" }}

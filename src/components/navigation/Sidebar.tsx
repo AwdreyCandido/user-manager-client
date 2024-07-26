@@ -6,24 +6,24 @@ import {
   Typography,
   List,
   ListItem,
-  CssBaseline
+  CssBaseline,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import wideLogo from "./../../assets/wide-logo.svg";
 
 const Sidebar = () => {
   return (
     <>
-      <CssBaseline/>
+      <CssBaseline />
       <Drawer
         variant="permanent"
-        
         sx={{
           width: 180,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
             display: "flex",
             gap: "20px",
-            width: 180,
+            // width: 180,
             boxSizing: "border-box",
             borderTopRightRadius: 20,
             borderBottomRightRadius: 20,
@@ -32,9 +32,9 @@ const Sidebar = () => {
         }}
       >
         <Box paddingX="20px">
-          <Typography variant="h4">Logo</Typography>
+          <img style={{ width: "150px" }} src={wideLogo} />
         </Box>
-        <Box>
+        <Box padding={1}>
           <List
             style={{
               width: "100%",
@@ -46,23 +46,23 @@ const Sidebar = () => {
             <NavLink
               to="/dashboard/home"
               style={({ isActive }) => {
-                return isActive ? {color: "#333"} : {color: "#8f8f8f"};
+                return isActive ? { color: "#4339F2" } : { color: "#8f8f8f" };
               }}
             >
               <ListItem style={{ gap: 10 }}>
                 <HomeRounded />
-                <Typography>Home</Typography>
+                <Typography fontSize={18}>Home</Typography>
               </ListItem>
             </NavLink>
             <NavLink
               to="/dashboard/insights"
               style={({ isActive }) => {
-                return isActive ? {color: "#333"} : {color: "#8f8f8f"};
+                return isActive ? { color: "#4339F2" } : { color: "#8f8f8f" };
               }}
             >
               <ListItem style={{ gap: 10 }}>
                 <PieChartRoundedIcon />
-                <Typography>Insights</Typography>
+                <Typography fontSize={18}>Insights</Typography>
               </ListItem>
             </NavLink>
           </List>

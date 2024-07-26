@@ -8,12 +8,17 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import { ArrowBack } from "@mui/icons-material";
 import { useContext, useEffect, useState } from "react";
 import { UsersContext } from "../../context/UsersContext";
 import { updateUserRequest } from "../../services/http/users";
+import {
+  notifyError,
+  notifySuccess,
+} from "../../services/notifications/toasts";
+import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
+import { formatDate } from "../../data/months";
 
 const style = {
   position: "absolute" as "absolute",
@@ -66,9 +71,7 @@ const UpdateUserModal: React.FC<{
   };
 
   const updateUserHandler = async () => {
-    console.log("id", selectedUserId, formValues);
     const res = await updateUserRequest(selectedUserId!, formValues);
-    console.log(res);
     if (res?.status == 200 || res?.status == 201) {
       updateUser({
         ...formValues,
@@ -76,10 +79,11 @@ const UpdateUserModal: React.FC<{
         createdAt: new Date().toDateString(),
         updatedAt: new Date().toISOString(),
       });
-      return handleClose();
+      handleClose();
+      return notifySuccess("Usuário atualizado com sucesso.");
     }
 
-    window.alert("Falha ao criar novo usuário.");
+    notifyError("Falha ao criar novo usuário.");
   };
 
   return (
@@ -146,7 +150,7 @@ const UpdateUserModal: React.FC<{
                 label="Data de Nascimento"
                 variant="outlined"
                 onChange={handleChange}
-                value={new Date(formValues.birthDate).toDateString()}
+                value={formValues.birthDate}
                 size="small"
                 type="date"
                 style={{ width: "100%" }}
@@ -202,7 +206,7 @@ const UpdateUserModal: React.FC<{
                 fontFamily: "sora",
                 fontSize: 16,
               }}
-              endIcon={<AddRoundedIcon />}
+              endIcon={<CheckRoundedIcon />}
             >
               Confirmar
             </Button>
@@ -214,11 +218,3 @@ const UpdateUserModal: React.FC<{
 };
 
 export default UpdateUserModal;
-
-function formatDate(dateString: string) {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
