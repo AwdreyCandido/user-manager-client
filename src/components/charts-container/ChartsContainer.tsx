@@ -51,7 +51,7 @@ const ChartsContainer = () => {
   };
 
   return (
-    <Box display="flex" gap={2} mt={4}>
+    <Box display="flex" gap={2} mt={2}>
       <Card
         style={{
           width: "100%",

@@ -25,7 +25,7 @@ const HomePage = () => {
   const handleUpdateOpen = () => setOpenUpdateModal(!openUpdateModal);
   const handleDeleteOpen = () => setOpenDeleteModal(!openDeleteModal);
 
-  const { setAllUsers,usersList } = useContext(UsersContext);
+  const { setAllUsers, usersList } = useContext(UsersContext);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -49,7 +49,8 @@ const HomePage = () => {
       <>
         {isLoading && <div>Carregando boy</div>}
         <Box
-        top={0}
+          maxHeight={"100vh"}
+          paddingY={3}
           style={{ width: "100%", display: "flex", flexDirection: "column" }}
         >
           <>
@@ -66,7 +67,7 @@ const HomePage = () => {
           <Typography variant="h3" fontWeight="medium">
             Visão Geral
           </Typography>
-          <Box marginTop={4}>
+          <Box marginTop={4} paddingBottom={4}>
             <TableContainer style={{ borderRadius: 20 }} component={Paper}>
               <Table aria-label="simple table">
                 <TableHead>
