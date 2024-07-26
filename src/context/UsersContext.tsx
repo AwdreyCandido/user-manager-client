@@ -3,13 +3,13 @@ import { IUser } from "../models/IUser";
 
 interface IUsersContextProps {
   showModal: boolean;
-  showAddModal: () => void;
-  closeModal: () => void;
   usersList: IUser[];
   setAllUsers: (incomingList: IUser[]) => void;
   addUser: (newUser: IUser) => void;
   updateUser: (updatedTask: IUser) => void;
   deleteUser: (id: number) => void;
+  selectUser: (userId: number) => void;
+  selectedUserId: number | null;
 }
 
 export const UsersContext = createContext<IUsersContextProps>(
@@ -21,23 +21,21 @@ const UsersContextProvider: React.FC<{ children: JSX.Element }> = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [usersList, setUsersList] = useState<IUser[]>([]);
-
-  const showAddModal = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
+  const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
 
   const setAllUsers = (incomingList: IUser[]) => {
     setUsersList(incomingList);
   };
 
+  // Select Handler
+  const selectUser = (userId: number) => {
+    setSelectedUserId(userId);
+    console.log(selectedUserId);
+  };
+
   // Users CRUD
   const addUser = (newUser: IUser) => {
     setUsersList((prev) => [newUser, ...prev]);
-    closeModal();
   };
 
   const updateUser = (updatedUser: IUser) => {
@@ -53,18 +51,17 @@ const UsersContextProvider: React.FC<{ children: JSX.Element }> = ({
     setUsersList([
       ...usersList!.filter((selectedTask) => selectedTask.id != id),
     ]);
-    closeModal();
   };
 
   const value = {
     showModal,
-    showAddModal,
-    closeModal,
     usersList,
     setAllUsers,
     addUser,
     updateUser,
     deleteUser,
+    selectUser,
+    selectedUserId,
   };
 
   return (

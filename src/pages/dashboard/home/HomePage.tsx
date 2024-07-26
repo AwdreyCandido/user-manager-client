@@ -16,6 +16,100 @@ import UpdateUserModal from "../../../components/modals/UpdateUserModal";
 import DeleteUserModal from "../../../components/modals/DeleteUserModal";
 import { UsersContext } from "../../../context/UsersContext";
 import { getAllUsersRequest } from "../../../services/http/users";
+import { localeDateConfig } from "../../../data/utils";
+
+const users = [
+  {
+    id: 1,
+    name: "Ana Costa",
+    email: "ana.costa@example.com",
+    gender: "F",
+    birthDate: "1991-03-29T03:00:00.000Z",
+    createdAt: "2024-01-05T12:15:00.000Z",
+    updatedAt: "2024-01-05T12:15:00.000Z",
+  },
+  {
+    id: 2,
+    name: "Rafael Martins",
+    email: "rafael.martins@example.com",
+    gender: "O",
+    birthDate: "1987-12-05T02:00:00.000Z",
+    createdAt: "2024-01-10T12:30:00.000Z",
+    updatedAt: "2024-01-10T12:30:00.000Z",
+  },
+  {
+    id: 3,
+    name: "Felipe Andrade",
+    email: "felipe.andrade@example.com",
+    gender: "M",
+    birthDate: "1996-10-14T02:00:00.000Z",
+    createdAt: "2024-01-15T13:30:00.000Z",
+    updatedAt: "2024-01-15T13:30:00.000Z",
+  },
+  {
+    id: 4,
+    name: "Mariana Costa",
+    email: "mariana.costa@example.com",
+    gender: "F",
+    birthDate: "1994-07-23T03:00:00.000Z",
+    createdAt: "2024-01-20T12:45:00.000Z",
+    updatedAt: "2024-01-20T12:45:00.000Z",
+  },
+  {
+    id: 5,
+    name: "João Silva",
+    email: "joao.silva@example.com",
+    gender: "M",
+    birthDate: "1988-05-14T03:00:00.000Z",
+    createdAt: "2024-01-25T13:00:00.000Z",
+    updatedAt: "2024-01-25T13:00:00.000Z",
+  },
+  {
+    id: 6,
+    name: "Alex Ferreira",
+    email: "alex.ferreira@example.com",
+    gender: "N",
+    birthDate: "1990-09-12T03:00:00.000Z",
+    createdAt: "2024-01-30T13:15:00.000Z",
+    updatedAt: "2024-01-30T13:15:00.000Z",
+  },
+  {
+    id: 7,
+    name: "Juliana Campos",
+    email: "juliana.campos@example.com",
+    gender: "F",
+    birthDate: "1993-11-18T02:00:00.000Z",
+    createdAt: "2024-02-10T12:45:00.000Z",
+    updatedAt: "2024-02-10T12:45:00.000Z",
+  },
+  {
+    id: 8,
+    name: "Camila Almeida",
+    email: "camila.almeida@example.com",
+    gender: "O",
+    birthDate: "1990-02-03T02:00:00.000Z",
+    createdAt: "2024-02-20T13:15:00.000Z",
+    updatedAt: "2024-02-20T13:15:00.000Z",
+  },
+  {
+    id: 9,
+    name: "Roberto Silva",
+    email: "roberto.silva@example.com",
+    gender: "M",
+    birthDate: "1984-08-22T03:00:00.000Z",
+    createdAt: "2024-02-25T13:00:00.000Z",
+    updatedAt: "2024-02-25T13:00:00.000Z",
+  },
+  {
+    id: 10,
+    name: "Laura Santos",
+    email: "laura.santos@example.com",
+    gender: "F",
+    birthDate: "1992-11-05T02:00:00.000Z",
+    createdAt: "2024-02-15T12:30:00.000Z",
+    updatedAt: "2024-02-15T12:30:00.000Z",
+  },
+];
 
 const HomePage = () => {
   const [openAddModal, setOpenAddModal] = React.useState(false);
@@ -25,7 +119,7 @@ const HomePage = () => {
   const handleUpdateOpen = () => setOpenUpdateModal(!openUpdateModal);
   const handleDeleteOpen = () => setOpenDeleteModal(!openDeleteModal);
 
-  const { setAllUsers, usersList } = useContext(UsersContext);
+  const { setAllUsers, usersList, selectUser } = useContext(UsersContext);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -42,6 +136,7 @@ const HomePage = () => {
     }
 
     window.alert("Erro ao buscar todos os produtos");
+    // setAllUsers(users);
   };
 
   return (
@@ -49,8 +144,9 @@ const HomePage = () => {
       <>
         {isLoading && <div>Carregando boy</div>}
         <Box
-          maxHeight={"100vh"}
           paddingY={3}
+          maxHeight={"100vh"}
+          height="100vh"
           style={{ width: "100%", display: "flex", flexDirection: "column" }}
         >
           <>
@@ -111,16 +207,13 @@ const HomePage = () => {
                         {new Date(row.birthDate).toLocaleDateString()}
                       </TableCell>
                       <TableCell align="right">
-                        {new Date(row.createdAt).toLocaleDateString()}
+                        {new Date(row?.createdAt!).toLocaleDateString()}
                       </TableCell>
                       <TableCell align="right">
-                        {new Date(row.updatedAt).toLocaleDateString("pt-BR", {
-                          year: "numeric",
-                          month: "2-digit",
-                          day: "2-digit",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
+                        {new Date(row?.updatedAt!).toLocaleDateString(
+                          "pt-BR",
+                          localeDateConfig
+                        )}
                       </TableCell>
                       <TableCell align="center">
                         <div
@@ -131,7 +224,10 @@ const HomePage = () => {
                           }}
                         >
                           <IconButton
-                            onClick={handleUpdateOpen}
+                            onClick={() => {
+                              handleUpdateOpen();
+                              selectUser(row.id!);
+                            }}
                             style={{
                               width: "35px",
                               height: "35px",
@@ -141,7 +237,10 @@ const HomePage = () => {
                             <EditRoundedIcon style={{ color: "#4339F2" }} />
                           </IconButton>
                           <IconButton
-                            onClick={handleDeleteOpen}
+                            onClick={() => {
+                              handleDeleteOpen();
+                              selectUser(row.id!);
+                            }}
                             style={{
                               width: "35px",
                               height: "35px",
@@ -165,71 +264,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-// function createUser(
-//   id: number,
-//   name: string,
-//   email: string,
-//   gender: "M" | "F" | "N",
-//   birthDate: string,
-//   createdAt: string,
-//   updatedAt: string
-// ) {
-//   return { id, name, email, gender, birthDate, createdAt, updatedAt };
-// }
-// const rows = [
-//   createUser(
-//     1,
-//     "João Silva",
-//     "joao.silva@example.com",
-//     "M",
-//     "1990-05-15",
-//     "2024-07-24T10:00:00",
-//     "2024-07-24T10:00:00"
-//   ),
-//   createUser(
-//     2,
-//     "Maria Oliveira",
-//     "maria.oliveira@example.com",
-//     "F",
-//     "1985-09-30",
-//     "2024-07-24T10:00:00",
-//     "2024-07-24T10:00:00"
-//   ),
-//   createUser(
-//     3,
-//     "Alex Santos",
-//     "alex.santos@example.com",
-//     "N",
-//     "2000-01-20",
-//     "2024-07-24T10:00:00",
-//     "2024-07-24T10:00:00"
-//   ),
-//   createUser(
-//     4,
-//     "Pedro Almeida",
-//     "pedro.almeida@example.com",
-//     "M",
-//     "1992-11-02",
-//     "2024-07-24T10:00:00",
-//     "2024-07-24T10:00:00"
-//   ),
-//   createUser(
-//     5,
-//     "Fernanda Souza",
-//     "fernanda.souza@example.com",
-//     "F",
-//     "1988-04-17",
-//     "2024-07-24T10:00:00",
-//     "2024-07-24T10:00:00"
-//   ),
-//   createUser(
-//     6,
-//     "Patrícia Lima",
-//     "patricia.lima@example.com",
-//     "F",
-//     "1995-07-23",
-//     "2024-07-24T10:00:00",
-//     "2024-07-24T10:00:00"
-//   ),
-// ];

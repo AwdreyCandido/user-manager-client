@@ -1,8 +1,12 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { useContext } from "react";
+import { UsersContext } from "../../context/UsersContext";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
+import { deleteUserRequest } from "../../services/http/users";
 
 const style = {
   position: "absolute" as "absolute",
@@ -21,6 +25,22 @@ const DeleteUserModal: React.FC<{
   handleClose: () => void;
   open: boolean;
 }> = ({ handleClose, open }) => {
+  const { selectedUserId, usersList, deleteUser } = useContext(UsersContext);
+  // const selectedUser = usersList.find((user) => user.id == selectedUserId);
+
+  const deleteUserHandler = async () => {
+    if (!selectedUserId) return window.alert("Falha ao excluir produto.");
+
+    const res = await deleteUserRequest(+selectedUserId!);
+
+    if (res?.status == 200) {
+      deleteUser(selectedUserId);
+      return handleClose();
+    }
+
+    window.alert("Falha ao excluir usuário.");
+  };
+
   return (
     <div>
       <Modal
@@ -39,8 +59,32 @@ const DeleteUserModal: React.FC<{
             Excluir Usuário
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            Tem certeza que deseja excluir esse produto? Essa ação é
+            irreversível.
           </Typography>
+
+          <Box
+            width="100%"
+            display="flex"
+            mt={2}
+            justifyContent="space-between"
+          >
+            <Button
+              variant="outlined"
+              onClick={deleteUserHandler}
+              style={{
+                backgroundColor: "#FF3A29",
+                color: "white",
+                borderRadius: 8,
+                textTransform: "capitalize",
+                fontFamily: "sora",
+                fontSize: 16,
+              }}
+              endIcon={<ClearRoundedIcon style={{ fontSize: 25 }} />}
+            >
+              Quero Excluir
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </div>
