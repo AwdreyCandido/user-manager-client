@@ -9,9 +9,9 @@ import {
 import BarChart from "../charts/BarChart";
 import PieChart from "../charts/PieChart";
 import { useEffect, useState } from "react";
-import { getRegistersPerMonthByGender } from "../../services/insights";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { months } from "../../data/months";
+import { getRegistersPerMonthByGender } from "../../services/http/insights";
 
 const ChartsContainer = () => {
   const [selectedMonth, setSelectedMonth] = useState<number>(

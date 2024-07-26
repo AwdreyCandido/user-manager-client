@@ -28,7 +28,7 @@ const PieChart: React.FC<{ registersPerMonth: number[] }> = ({
           usePointStyle: true,
           pointStyle: "circle",
           font: {
-            size: 14,
+            size: 12,
             family: "Sora Variable, sans-serif",
           },
         },

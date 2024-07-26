@@ -7,14 +7,14 @@ const Layout: React.FC<{ children: JSX.Element }> = ({ children }) => {
       <Sidebar />
       <Box
         style={{
-          minHeight: "100vh",
+          // minHeight: "100vh",
           width: "100%",
           display: "flex",
         }}
         paddingX={4}
         paddingBottom={6}
         paddingY={3}
-        sx={{overflowY: 'scroll'}}
+        sx={{overflowY: 'auto'}}
       >
         {children}
       </Box>

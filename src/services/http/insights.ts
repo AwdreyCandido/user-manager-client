@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
-import { getApiClient } from "./axios";
+import { getApiClient } from "../axios";
 
 const NEST_API: AxiosInstance = getApiClient();
 

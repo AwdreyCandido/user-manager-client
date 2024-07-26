@@ -5,10 +5,7 @@ import WcRoundedIcon from "@mui/icons-material/WcRounded";
 import TransgenderRoundedIcon from "@mui/icons-material/TransgenderRounded";
 import PeopleRoundedIcon from "@mui/icons-material/PeopleRounded";
 import { useState, useEffect } from "react";
-import {
-  getRegistersPerMonthByGender,
-  getRegistersQuantity,
-} from "../../services/insights";
+import { getRegistersQuantity } from "../../services/http/insights";
 
 const InformativeCards = () => {
   const [selectedMonth, setSelectedMonth] = useState<number>(
@@ -46,10 +43,13 @@ const InformativeCards = () => {
   };
 
   return (
-    <Box display="flex" gap={2} sx={{ width: "100%", mt: 4 }}>
+    <Box display="flex" gap={1} sx={{ width: "100%", mt: 4 }}>
       <Grid width={"100%"} container columns={10} spacing={2}>
-        <Grid item xs={1.5}>
-          <Card style={{ borderRadius: 15, minWidth: "fit-content" }} variant="outlined">
+        <Grid item>
+          <Card
+            style={{ borderRadius: 15, minWidth: "fit-content" }}
+            variant="outlined"
+          >
             <CardContent>
               <Typography sx={{ mb: 1.5, fontSize: 18 }} color="text.secondary">
                 Total de Registros
@@ -58,7 +58,7 @@ const InformativeCards = () => {
                 display="flex"
                 flexDirection={"column"}
                 alignItems="start"
-                gap={2}
+                gap={1}
               >
                 <div
                   style={{
@@ -80,13 +80,13 @@ const InformativeCards = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item>
           <Card style={{ borderRadius: 15 }} variant="outlined">
             <CardContent>
               <Typography sx={{ mb: 1.5, fontSize: 18 }} color="text.secondary">
                 Sexo Masculino
               </Typography>
-              <Box display="flex" alignItems="end" gap={2}>
+              <Box display="flex" alignItems="end" gap={1}>
                 <div
                   style={{
                     display: "flex",
@@ -106,13 +106,13 @@ const InformativeCards = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item>
           <Card style={{ borderRadius: 15 }} variant="outlined">
             <CardContent>
               <Typography sx={{ mb: 1.5, fontSize: 18 }} color="text.secondary">
                 Sexo Feminino
               </Typography>
-              <Box display="flex" alignItems="end" gap={2}>
+              <Box display="flex" alignItems="end" gap={1}>
                 <div
                   style={{
                     display: "flex",
@@ -132,13 +132,13 @@ const InformativeCards = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item>
           <Card style={{ borderRadius: 15 }} variant="outlined">
             <CardContent>
               <Typography sx={{ mb: 1.5, fontSize: 18 }} color="text.secondary">
                 Não Informado
               </Typography>
-              <Box display="flex" alignItems="end" gap={2}>
+              <Box display="flex" alignItems="end" gap={1}>
                 <div
                   style={{
                     display: "flex",
@@ -158,13 +158,13 @@ const InformativeCards = () => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item>
           <Card style={{ borderRadius: 15 }} variant="outlined">
             <CardContent>
               <Typography sx={{ mb: 1.5, fontSize: 18 }} color="text.secondary">
                 Outros
               </Typography>
-              <Box display="flex" alignItems="end" gap={2}>
+              <Box display="flex" alignItems="end" gap={1}>
                 <div
                   style={{ display: "flex", alignItems: "end", color: "#333 " }}
                 >

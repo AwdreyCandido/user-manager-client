@@ -11,6 +11,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import InsightsPage from "./pages/dashboard/insights/InsightsPage.tsx";
+import UsersContextProvider from "./context/UsersContext.tsx";
 
 const theme = createTheme({
   typography: {
@@ -26,8 +27,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <UsersContextProvider>
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </UsersContextProvider>
   </React.StrictMode>
 );
