@@ -1,10 +1,17 @@
-import React from "react";
+import InformativeCards from "../../../components/informative-cards/InformativeCards";
 import Layout from "../../../components/layout/Layout";
+import { Typography, Box } from "@mui/material";
 
 const InsightsPage = () => {
   return (
     <Layout>
-      <div>InsightsPage</div>
+      <Box style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+        <Typography variant="h3" fontWeight="medium" component="h3">
+          Informações
+        </Typography>
+
+        <InformativeCards />
+      </Box>
     </Layout>
   );
 };
