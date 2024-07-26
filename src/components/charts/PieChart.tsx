@@ -13,7 +13,7 @@ const PieChart: React.FC<{ registersPerMonth: number[] }> = ({
         label: "Total",
         data: registersPerMonth,
         backgroundColor: ["#4339F2", "#FF007F", "#e6e600", "#333"],
-        borderWidth: 1,
+        borderWidth: 0,
       },
     ],
   };
@@ -23,6 +23,7 @@ const PieChart: React.FC<{ registersPerMonth: number[] }> = ({
     plugins: {
       legend: {
         position: "top",
+        align: "start",
         labels: {
           usePointStyle: true,
           pointStyle: "circle",
@@ -31,6 +32,7 @@ const PieChart: React.FC<{ registersPerMonth: number[] }> = ({
             family: "Sora Variable, sans-serif",
           },
         },
+
       },
       title: {
         display: true,

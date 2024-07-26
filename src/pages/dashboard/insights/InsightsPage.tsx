@@ -9,7 +9,7 @@ const InsightsPage = () => {
   return (
     <Layout>
       <Box style={{ width: "100%", display: "flex", flexDirection: "column" }}>
-        <Typography variant="h3" fontWeight="medium" component="h3">
+        <Typography variant="h4" fontWeight="Bold" component="h4">
           Informações
         </Typography>
 

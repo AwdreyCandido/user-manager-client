@@ -40,7 +40,7 @@ const HomePage = () => {
             open={openDeleteModal}
           />
         </>
-        <Typography variant="h3" fontWeight="medium" component="h3">
+        <Typography variant="h4" fontWeight="Bold" component="h4">
           Visão Geral
         </Typography>
         <Box marginTop={4}>

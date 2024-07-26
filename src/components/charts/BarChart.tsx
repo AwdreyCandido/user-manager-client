@@ -22,7 +22,7 @@ const BarChart: React.FC<{ registersPerMonth: number[] }> = ({
   registersPerMonth,
 }) => {
   const data = {
-    labels: ["Masculino", "Feminino", "Outros", "Não informado"],
+    labels: ["Masculino", "Feminino", "Não informado", "Outros"],
     datasets: [
       {
         data: registersPerMonth,
