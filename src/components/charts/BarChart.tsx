@@ -20,27 +20,38 @@ ChartJS.register(
 
 const BarChart = () => {
   const data = {
-    labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho"],
+    labels: ["Masculino", "Feminino", "Outros", "Não informado"],
     datasets: [
       {
-        label: "Vendas 2024 (em milhares)",
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        borderColor: "rgba(75, 192, 192, 1)",
+        data: [12, 24, 7, 2],
+        backgroundColor: ["#4339F2", "#FF007F", "#e6e600", "#333"],
         borderWidth: 1,
+        borderRadius: 20,
       },
     ],
   };
 
-  const options = {
+  const options: any = {
     responsive: true,
     plugins: {
       legend: {
+        display: false,
         position: "top",
+        fontSize: 20,
       },
       title: {
         display: true,
-        text: "Gráfico de Barras - Vendas Mensais",
+        text: "Registros - Sexo x Mês",
+        font: {
+          size: 18,
+          family: "Sora Variable, sans-serif",
+          weight: "400",
+        },
+        align: "start",
+        padding: {
+          top: 10,
+          bottom: 30,
+        },
       },
     },
   };
