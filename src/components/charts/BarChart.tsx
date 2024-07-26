@@ -18,12 +18,14 @@ ChartJS.register(
   Legend
 );
 
-const BarChart = () => {
+const BarChart: React.FC<{ registersPerMonth: number[] }> = ({
+  registersPerMonth,
+}) => {
   const data = {
     labels: ["Masculino", "Feminino", "Outros", "Não informado"],
     datasets: [
       {
-        data: [12, 24, 7, 2],
+        data: registersPerMonth,
         backgroundColor: ["#4339F2", "#FF007F", "#e6e600", "#333"],
         borderWidth: 1,
         borderRadius: 20,

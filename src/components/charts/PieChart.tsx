@@ -3,13 +3,15 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const PieChart = () => {
+const PieChart: React.FC<{ registersPerMonth: number[] }> = ({
+  registersPerMonth,
+}) => {
   const data = {
     labels: ["Masculino", "Feminino", "Outros", "Não informado"],
     datasets: [
       {
         label: "Total",
-        data: [12, 24, 7, 2],
+        data: registersPerMonth,
         backgroundColor: ["#4339F2", "#FF007F", "#e6e600", "#333"],
         borderWidth: 1,
       },
