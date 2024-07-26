@@ -10,7 +10,7 @@ import BarChart from "../charts/BarChart";
 import PieChart from "../charts/PieChart";
 import { useEffect, useState } from "react";
 import { getRegistersPerMonthByGender } from "../../services/insights";
-import SelectInput, { SelectChangeEvent } from "@mui/material/Select";
+import { SelectChangeEvent } from "@mui/material/Select";
 import { months } from "../../data/months";
 
 const ChartsContainer = () => {
@@ -25,8 +25,6 @@ const ChartsContainer = () => {
 
   const getRegistersPerMonthByGenderHandler = async () => {
     const res = await getRegistersPerMonthByGender(selectedMonth);
-    console.log(res?.data);
-
     if (res?.status == 200) {
       extractRegistersQuantity(res?.data);
     }

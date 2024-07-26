@@ -12,8 +12,9 @@ const Layout: React.FC<{ children: JSX.Element }> = ({ children }) => {
           display: "flex",
         }}
         paddingX={4}
+        paddingBottom={6}
         paddingY={3}
-        sx={{overflowY: 'auto'}}
+        sx={{overflowY: 'scroll'}}
       >
         {children}
       </Box>

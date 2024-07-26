@@ -3,6 +3,22 @@ import { getApiClient } from "./axios";
 
 const NEST_API: AxiosInstance = getApiClient();
 
+export const getRegistersQuantity = async () => {
+  try {
+    const res = await NEST_API.get(`/users/insights/all`);
+    return {
+      status: res.status,
+      statusText: res.statusText,
+      data: res.data.data,
+    };
+  } catch (error) {
+    console.error(error);
+    if (axios.isAxiosError(error)) {
+      handleAxiosError(error);
+    }
+  }
+};
+
 export const getRegistersPerMonthByGender = async (month: number) => {
   try {
     const res = await NEST_API.get(`/users/insights/${month}`);
