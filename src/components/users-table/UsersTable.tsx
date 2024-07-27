@@ -1,32 +1,61 @@
-import React, { useContext, useState } from "react";
+import * as React from "react";
+import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
+import TableFooter from "@mui/material/TableFooter";
+import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import IconButton from "@mui/material/IconButton";
 import AddUserModal from "../modals/AddUserModal";
 import DeleteUserModal from "../modals/DeleteUserModal";
 import UpdateUserModal from "../modals/UpdateUserModal";
-import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
-import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import emptyLogo from "./../../assets/empty.png";
-import { Box, Button, IconButton, Typography } from "@mui/material";
-import { IUser } from "../../models/IUser";
-import { localeDateConfig } from "../../data/utils";
+import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import TablePaginationActions from "./TablePaginationActions";
+import { Typography, TableHead, Button } from "@mui/material";
 import { UsersContext } from "../../context/UsersContext";
+import { formatPhoneNumber, localeDateConfig } from "../../data/utils";
+import { IUser } from "../../models/IUser";
+import { useContext, useState } from "react";
+
+const genderHelper: { M: string; F: string; N: string; O: string } = {
+  M: "Masculino",
+  F: "Feminino",
+  N: "Não informado",
+  O: "Outros",
+};
 
 const UsersTable: React.FC<{ usersList: IUser[] }> = ({ usersList }) => {
+  const { selectUser } = useContext(UsersContext);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
   const handleAddOpen = () => setOpenAddModal(!openAddModal);
   const handleUpdateOpen = () => setOpenUpdateModal(!openUpdateModal);
   const handleDeleteOpen = () => setOpenDeleteModal(!openDeleteModal);
 
-  const { selectUser } = useContext(UsersContext);
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
+    event?.preventDefault();
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   if (usersList.length == 0) {
     return (
@@ -42,7 +71,7 @@ const UsersTable: React.FC<{ usersList: IUser[] }> = ({ usersList }) => {
           Nenhum registro encontrado
         </Typography>
         <Box display="flex" justifyContent="center" mt={3}>
-          <img style={{width: "400px"}} src={emptyLogo} />
+          <img style={{ width: "400px" }} src={emptyLogo} />
         </Box>
       </Box>
     );
@@ -67,9 +96,10 @@ const UsersTable: React.FC<{ usersList: IUser[] }> = ({ usersList }) => {
             <TableRow>
               <TableCell>Nome Completo</TableCell>
               <TableCell>E-mail</TableCell>
+              <TableCell>Telefone</TableCell>
               <TableCell align="right">Gênero</TableCell>
               <TableCell align="right">Nascimento</TableCell>
-              <TableCell align="right">Criado em:</TableCell>
+              {/* <TableCell align="right">Criado em:</TableCell> */}
               <TableCell align="right">Atualizado em:</TableCell>
               <TableCell align="center">
                 <Button
@@ -90,22 +120,31 @@ const UsersTable: React.FC<{ usersList: IUser[] }> = ({ usersList }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {usersList.map((row) => (
+            {(rowsPerPage > 0
+              ? usersList.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : usersList
+            ).map((row) => (
               <TableRow
-                key={row.name}
+                key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
                 <TableCell>{row.email}</TableCell>
-                <TableCell align="right">{row.gender}</TableCell>
+                <TableCell>{formatPhoneNumber(row.phone)}</TableCell>
+                <TableCell align="right">
+                  {genderHelper[row.gender as keyof typeof genderHelper]}
+                </TableCell>
                 <TableCell align="right">
                   {new Date(row.birthDate).toLocaleDateString()}
                 </TableCell>
-                <TableCell align="right">
+                {/* <TableCell align="right">
                   {new Date(row?.createdAt!).toLocaleDateString()}
-                </TableCell>
+                </TableCell> */}
                 <TableCell align="right">
                   {new Date(row?.updatedAt!).toLocaleDateString(
                     "pt-BR",
@@ -151,6 +190,27 @@ const UsersTable: React.FC<{ usersList: IUser[] }> = ({ usersList }) => {
               </TableRow>
             ))}
           </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                style={{ backgroundColor: "#e9e9e9" }}
+                rowsPerPageOptions={[5, 10, 25, { label: "Tudo", value: -1 }]}
+                count={usersList.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                slotProps={{
+                  select: {
+                    inputProps: {
+                      "aria-label": "Linhas por página",
+                    },
+                  },
+                }}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+              />
+            </TableRow>
+          </TableFooter>
         </Table>
       </TableContainer>
     </Box>
