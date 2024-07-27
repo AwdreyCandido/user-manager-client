@@ -17,7 +17,9 @@ const ChartsContainer = () => {
   const [selectedMonth, setSelectedMonth] = useState<number>(
     new Date().getMonth() + 1
   );
-  const [registerPerMonth, setRegisterPerMonth] = useState<number[]>([]);
+  const [registerPerMonth, setRegisterPerMonth] = useState<number[]>([
+    0, 0, 0, 0,
+  ]);
 
   useEffect(() => {
     getRegistersPerMonthByGenderHandler();
@@ -33,7 +35,7 @@ const ChartsContainer = () => {
   const extractRegistersQuantity = (
     data: { gender: string; quantity: number }[]
   ) => {
-    const list: number[] = [];
+    const list: number[] = [0, 0, 0, 0];
 
     data.forEach((item) => {
       if (item.gender == "M") return (list[0] = item.quantity);
@@ -78,11 +80,10 @@ const ChartsContainer = () => {
               Selecione um Mês
             </InputLabel>
             <Select
-              style={{ height: "50px" }}
+              style={{ height: "50px", borderRadius: 10 }}
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               defaultValue={selectedMonth}
-              label="Age"
               onChange={selectMonthHandler}
             >
               {months.map((month) => {

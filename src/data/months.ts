@@ -11,6 +11,7 @@ export const months = [
   { name: "Outubro", number: 10 },
   { name: "Novembro", number: 11 },
   { name: "Dezembro", number: 12 },
+  { name: "Todos", number: 0 },
 ];
 
 export function formatDate(dateString: string) {
