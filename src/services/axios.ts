@@ -12,5 +12,5 @@ export function getApiClient() {
   return API;
 }
 
-const LOCAL_API_ENDPOINT = "http://localhost:4000";
+// const LOCAL_API_ENDPOINT = "http://localhost:4000";
 const HOSTED_API_BASE_URL = "https://user-manager-api-dcry.onrender.com";
