@@ -34,7 +34,7 @@ const UsersTable: React.FC<{ usersList: IUser[] }> = ({ usersList }) => {
         width="100%"
         height="100%"
         mt={10}
-        borderRadius={8}
+        borderRadius={5}
         padding={3}
         bgcolor="#e0e0e0"
       >

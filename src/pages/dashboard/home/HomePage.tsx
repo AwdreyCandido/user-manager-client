@@ -3,7 +3,7 @@ import UsersTable from "../../../components/users-table/UsersTable";
 import { useContext, useEffect, useState } from "react";
 import { UsersContext } from "../../../context/UsersContext";
 import { getAllUsersRequest } from "../../../services/http/users";
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Skeleton, Typography } from "@mui/material";
 import { notifyError } from "../../../services/notifications/toasts";
 
 const HomePage = () => {
@@ -22,13 +22,13 @@ const HomePage = () => {
       return setIsLoading(false);
     }
 
+    setIsLoading(false);
     notifyError("Erro ao buscar todos os produtos");
   };
 
   return (
     <Layout>
       <>
-        {isLoading && <div>Carregando boy</div>}
         <Box
           paddingY={3}
           maxHeight={"100vh"}
@@ -38,7 +38,25 @@ const HomePage = () => {
           <Typography variant="h3" fontWeight="medium">
             Visão Geral
           </Typography>
-          <UsersTable usersList={usersList} />
+          {isLoading ? (
+            <Box
+              display="flex"
+              width="100%"
+              height="100%"
+              mt={10}
+              borderRadius={5}
+              overflow="hidden"
+            >
+              <Skeleton
+              animation="wave"
+                variant="rectangular"
+                width="100%"
+                height="100%"
+              ></Skeleton>
+            </Box>
+          ) : (
+            <UsersTable usersList={usersList} />
+          )}
         </Box>
       </>
     </Layout>
