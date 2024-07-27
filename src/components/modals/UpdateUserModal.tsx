@@ -51,7 +51,6 @@ const UpdateUserModal: React.FC<{
 
   useEffect(() => {
     if (selectedUser) {
-      console.log(selectedUser);
       setFormValues({
         name: selectedUser.name,
         email: selectedUser.email,

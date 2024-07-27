@@ -28,7 +28,6 @@ const UsersContextProvider: React.FC<{ children: JSX.Element }> = ({
   // Select Handler
   const selectUser = (userId: number) => {
     setSelectedUserId(userId);
-    console.log(selectedUserId);
   };
 
   // Users CRUD
@@ -42,7 +41,6 @@ const UsersContextProvider: React.FC<{ children: JSX.Element }> = ({
     );
 
     usersList[selectedUserIndex] = updatedUser;
-    console.log(updatedUser);
   };
 
   const deleteUser = (id: number) => {

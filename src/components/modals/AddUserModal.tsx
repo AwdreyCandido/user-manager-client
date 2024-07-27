@@ -18,7 +18,6 @@ import {
   notifyError,
   notifySuccess,
 } from "../../services/notifications/toasts";
-import { formatDate } from "../../data/months";
 
 const style = {
   position: "absolute" as "absolute",
@@ -59,7 +58,6 @@ const AddUserModal: React.FC<{
 
   const addNewUserHandler = async () => {
     const res = await createUserRequest(formValues);
-
     if (res?.status == 200 || res?.status == 201) {
       const id = res.data.insertId;
       addUser({
@@ -139,9 +137,7 @@ const AddUserModal: React.FC<{
                 label="Data de Nascimento"
                 variant="outlined"
                 onChange={handleChange}
-                value={formatDate(
-                  new Date(formValues.birthDate).toUTCString()
-                )}
+                value={formValues.birthDate}
                 size="small"
                 type="date"
                 style={{ width: "100%" }}
