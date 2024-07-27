@@ -3,7 +3,7 @@ import UsersTable from "../../../components/users-table/UsersTable";
 import { useContext, useEffect, useState } from "react";
 import { UsersContext } from "../../../context/UsersContext";
 import { getAllUsersRequest } from "../../../services/http/users";
-import { Box, CircularProgress, Skeleton, Typography } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import { notifyError } from "../../../services/notifications/toasts";
 
 const HomePage = () => {
