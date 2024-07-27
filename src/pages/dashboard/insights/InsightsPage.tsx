@@ -6,7 +6,7 @@ import { Typography, Box } from "@mui/material";
 const InsightsPage = () => {
   return (
     <Layout>
-      <Box maxHeight="100vh" style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+      <Box maxHeight="100vh" paddingY={3} style={{ width: "100%", display: "flex", flexDirection: "column" }}>
         <Typography variant="h3" fontWeight="medium">
           Informações
         </Typography>
