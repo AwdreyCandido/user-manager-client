@@ -18,8 +18,11 @@ const HomePage = () => {
     setIsLoading(true);
     const res = await getAllUsersRequest();
     if (res?.status == 200) {
-      setAllUsers(res.data);
-      return setIsLoading(false);
+      const users = res.data;
+      if (Array.isArray(users) && users.length > 0) {
+        setAllUsers(users);
+        return setIsLoading(false);
+      }
     }
 
     setIsLoading(false);
@@ -48,7 +51,7 @@ const HomePage = () => {
               overflow="hidden"
             >
               <Skeleton
-              animation="wave"
+                animation="wave"
                 variant="rectangular"
                 width="100%"
                 height="100%"
